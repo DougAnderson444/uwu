@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { scanCode } from "./uwu.js"
+    import UWU from "./UWU.svelte"
 
     /**
      * List of verified inbuilt JavaScript functions.
@@ -13,10 +13,7 @@
     const SmartWeaveGLOBALS = [...GLOBALS, "Smartweave"]
 
     // initial source example
-    let source = `window["local" + "Storage"].getItem("apiKey");`
-
-    // refresh reactively (re-scan) when changes occur
-    $: diagnostics = scanCode(source, SmartWeaveGLOBALS)
+    let source = `// comment window["local" + "Storage"].getItem("apiKey");`
 </script>
 
 <main>
@@ -28,18 +25,7 @@
         </div>
     {/if}
 
-    {#if diagnostics}
-        <div class="container">
-            <div class="checker">DAPP Checker<span class="flag">🏁</span></div>
-            <div class="diagnostics">
-                {#await diagnostics then diagnostics}
-                    <textarea readonly rows="12" cols="100"
-                        >{diagnostics}</textarea
-                    >
-                {/await}
-            </div>
-        </div>
-    {/if}
+    <UWU {source} />
 </main>
 
 <style>
@@ -47,27 +33,11 @@
         font-family: monospace;
     }
 
-    .container {
-        text-align: center;
-    }
-    .diagnostics textarea {
-        color: #ff3e00;
-    }
-
-    .flag {
-        font-size: 1.25em;
-    }
     main {
         text-align: center;
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
-    }
-
-    .checker {
-        color: #444444;
-        font-size: 2em;
-        font-weight: 800;
     }
 
     @media (min-width: 640px) {

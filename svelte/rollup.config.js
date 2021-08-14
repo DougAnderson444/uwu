@@ -31,7 +31,7 @@ function serve() {
 	};
 }
 
-export default {
+export default [{
 	input: 'src/main.ts',
 	output: {
 		sourcemap: true,
@@ -87,4 +87,4 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+}]

@@ -13,15 +13,13 @@
 
         // Scan, collect diagnostics.
         let diagnostics = scan(sourceCode, globals)
-
+        
         // If no diagnostics, evalutate code...
-        if (diagnostics.length < 0) {
-            let execute = new Function(input)
-            execute()
-        }
-        // ...Otherwise show what's wrong.
-        else {
-            console.error(diagnostics)
+        if (diagnostics === "true") {
+            // good code
+            console.log('good code',diagnostics)
+        }else{
+            console.error('bad code',diagnostics)
         }
 
         return diagnostics
